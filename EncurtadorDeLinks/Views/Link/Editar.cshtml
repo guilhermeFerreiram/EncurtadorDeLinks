@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Editar Link";
+}
+
+<div class="text-center">
+
+    <h1 class="display-4">Encurtar novo Link</h1>
+
+</div>
+
+<form>
+
+    <div class="mb-3">
+        <label for="nome" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="nome" placeholder="Digite a identificação do link aqui...">
+    </div>
+
+    <div class="mb-3">
+        <label for="linkOriginal" class="form-label">Link Original</label>
+        <input type="text" class="form-control" id="linkOriginal" placeholder="Cole o link original aqui...">
+    </div>
+
+    <div class="mb-3">
+        <label for="linkEncurtado" class="form-label">Link Encurtado</label>
+        <input type="text" class="form-control" id="linkEncurtado" placeholder="Link encurtado...">
+        @*Aqui não é um input, usuário não pode alterar o link encurtado*@
+    </div>
+    <a role="button" class="btn btn-primary">Gerar novo link encurtado</a>
+
+    <br></br>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a class="btn btn-secondary" role="button" asp-controller="Link" asp-action="Index">Voltar</a>
+</form>
