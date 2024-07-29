@@ -1,4 +1,6 @@
-﻿@{
+﻿@model LinkModel
+
+@{
     ViewData["Title"] = "Encurtar Novo Link";
 }
 
@@ -8,15 +10,14 @@
 
 </div>
 
-<form>
-
+<form asp-controller="Link" asp-action="Criar" method="post">
     <div class="mb-3">
         <label for="nome" class="form-label">Nome</label>
-        <input type="text" class="form-control" id="nome" placeholder="Digite a identificação do link aqui...">
+        <input type="text" asp-for="Nome" class="form-control" id="nome" placeholder="Digite a identificação do link aqui...">
     </div>
     <div class="mb-3">
         <label for="linkOriginal" class="form-label">Link Original</label>
-        <input type="text" class="form-control" id="linkOriginal" placeholder="Cole o link original aqui...">
+        <input type="text" asp-for="LinkOriginal" class="form-control" id="linkOriginal" placeholder="Cole o link original aqui...">
     </div>
 
     <button type="submit" class="btn btn-primary">Gerar Link Encurtado</button>

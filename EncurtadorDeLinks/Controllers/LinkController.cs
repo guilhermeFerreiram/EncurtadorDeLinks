@@ -1,15 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EncurtadorDeLinks.Models;
+using EncurtadorDeLinks.Repositorio;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EncurtadorDeLinks.Controllers
 {
     public class LinkController : Controller
     {
-        public IActionResult Index()
+        private readonly ILinkRepositorio _linkRepositorio;
+
+        public LinkController(ILinkRepositorio linkRepositorio)
         {
-            return View();
+            _linkRepositorio = linkRepositorio;
         }
 
-        public IActionResult Encurtar()
+        public IActionResult Index()
+        {
+            var links = _linkRepositorio.BuscarTodos();
+            return View(links);
+        }
+
+        public IActionResult Criar()
         {
             return View();
         }
@@ -22,6 +32,14 @@ namespace EncurtadorDeLinks.Controllers
         public IActionResult ApagarConfirmacao()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Criar(LinkModel link)
+        {
+            link.Encurtar(); // Precisa conferir se shortCode já existe no banco de dados
+            _linkRepositorio.Adicionar(link);
+            return RedirectToAction("Index");
         }
     }
 }
