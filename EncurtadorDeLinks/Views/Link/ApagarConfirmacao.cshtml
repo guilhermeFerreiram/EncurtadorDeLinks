@@ -1,10 +1,12 @@
-﻿@{
+﻿@model LinkModel
+
+@{
     ViewData["Title"] = "Confirmação para Apagar Link";
 }
 
 <div class="text-center">
-    <p>Deseja realmente apagar este link (nome do link)?</p>
+    <p>Deseja realmente apagar este link (@Model.Nome)?</p>
 </div>
 
 <a role="button" class="btn btn-primary" asp-controller="Link" asp-action="Index">Cancelar exclusão</a>
-<a role="button" class="btn btn-danger" asp-controller="Link" asp-action="Apagar">Confirmar exclusão</a>
+<a role="button" class="btn btn-danger" asp-route-id="@Model.Id" asp-controller="Link" asp-action="Apagar">Confirmar exclusão</a>

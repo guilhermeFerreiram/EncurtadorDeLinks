@@ -6,5 +6,8 @@ namespace EncurtadorDeLinks.Repositorio
     {
         LinkModel Adicionar(LinkModel link);
         List<LinkModel> BuscarTodos();
+        LinkModel ListarPorId(int id);
+        LinkModel Atualizar(LinkModel link);
+        bool Apagar(int id);
     }
 }

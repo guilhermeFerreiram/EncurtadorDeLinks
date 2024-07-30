@@ -1,4 +1,6 @@
-﻿@{
+﻿@model LinkModel
+
+@{
     ViewData["Title"] = "Editar Link";
 }
 
@@ -8,27 +10,24 @@
 
 </div>
 
-<form>
+<form asp-controller="Link" asp-action="Alterar" method="post">
+
+    <input type="hidden" asp-for="Id"/>
 
     <div class="mb-3">
         <label for="nome" class="form-label">Nome</label>
-        <input type="text" class="form-control" id="nome" placeholder="Digite a identificação do link aqui...">
+        <input type="text" asp-for="Nome" class="form-control" id="nome" placeholder="Digite a identificação do link aqui...">
     </div>
-
     <div class="mb-3">
         <label for="linkOriginal" class="form-label">Link Original</label>
-        <input type="text" class="form-control" id="linkOriginal" placeholder="Cole o link original aqui...">
+        <input type="text" asp-for="LinkOriginal" class="form-control" id="linkOriginal" placeholder="Cole o link original aqui...">
     </div>
 
     <div class="mb-3">
         <label for="linkEncurtado" class="form-label">Link Encurtado</label>
-        <input type="text" class="form-control" id="linkEncurtado" placeholder="Link encurtado...">
-        @*Aqui não é um input, usuário não pode alterar o link encurtado*@
+        <input type="text" asp-for="LinkEncurtado" class="form-control" id="linkEncurtado" placeholder="Link encurtado..." readonly>
     </div>
-    <a role="button" class="btn btn-primary">Gerar novo link encurtado</a>
-
-    <br></br>
 
     <button type="submit" class="btn btn-primary">Salvar</button>
-    <a class="btn btn-secondary" role="button" asp-controller="Link" asp-action="Index">Voltar</a>
+    <a class="btn btn-secondary" role="button" asp-controller="Link" asp-action="Index">Voltar</a> @*Mensagem de aviso que as alterações não foram salvas*@
 </form>

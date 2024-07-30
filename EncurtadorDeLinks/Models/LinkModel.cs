@@ -1,5 +1,7 @@
 ﻿namespace EncurtadorDeLinks.Models
 {
+    // Adicionar data de criação e data de modificação
+
     public class LinkModel
     {
         public int Id { get; set; }
@@ -9,8 +11,13 @@
 
         public void Encurtar() // Precisa conferir se shortCode já existe no banco de dados
         {
-            string shortCode = Guid.NewGuid().ToString("N").Substring(0, 6);
+            string shortCode = GerarShortCode();
             LinkEncurtado = shortCode;
+        }
+
+        public string GerarShortCode()
+        {
+            return Guid.NewGuid().ToString("N").Substring(0, 6);
         }
     }
 }

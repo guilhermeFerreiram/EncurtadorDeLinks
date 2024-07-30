@@ -24,14 +24,16 @@ namespace EncurtadorDeLinks.Controllers
             return View();
         }
 
-        public IActionResult Editar()
+        public IActionResult Editar(int id)
         {
-            return View();
+            var link = _linkRepositorio.ListarPorId(id);
+            return View(link);
         }
 
-        public IActionResult ApagarConfirmacao()
+        public IActionResult ApagarConfirmacao(int id)
         {
-            return View();
+            var link = _linkRepositorio.ListarPorId(id);
+            return View(link);
         }
 
         [HttpPost]
@@ -39,6 +41,18 @@ namespace EncurtadorDeLinks.Controllers
         {
             link.Encurtar(); // Precisa conferir se shortCode já existe no banco de dados
             _linkRepositorio.Adicionar(link);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Alterar(LinkModel link)
+        {
+            _linkRepositorio.Atualizar(link);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Apagar(int id)
+        {
+            _linkRepositorio.Apagar(id);
             return RedirectToAction("Index");
         }
     }
