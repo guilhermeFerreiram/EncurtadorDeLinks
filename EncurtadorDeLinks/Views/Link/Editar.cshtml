@@ -17,10 +17,12 @@
     <div class="mb-3">
         <label for="nome" class="form-label">Nome</label>
         <input type="text" asp-for="Nome" class="form-control" id="nome" placeholder="Digite a identificação do link aqui...">
+        @Html.ValidationMessageFor(x => x.Nome)
     </div>
     <div class="mb-3">
         <label for="linkOriginal" class="form-label">Link Original</label>
         <input type="text" asp-for="LinkOriginal" class="form-control" id="linkOriginal" placeholder="Cole o link original aqui...">
+        @Html.ValidationMessageFor(x => x.LinkOriginal)
     </div>
 
     <div class="mb-3">

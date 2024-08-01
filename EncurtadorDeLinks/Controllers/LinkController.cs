@@ -39,21 +39,73 @@ namespace EncurtadorDeLinks.Controllers
         [HttpPost]
         public IActionResult Criar(LinkModel link)
         {
-            link.Encurtar(); // Precisa conferir se shortCode já existe no banco de dados
-            _linkRepositorio.Adicionar(link);
-            return RedirectToAction("Index");
+            try
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+                foreach (var error in errors)
+                {
+                    Console.WriteLine(error.ErrorMessage);
+                }
+
+                if (ModelState.IsValid)
+                {
+                    link.Encurtar(); // Precisa conferir se shortCode já existe no banco de dados
+                    _linkRepositorio.Adicionar(link);
+                    TempData["MensagemSucesso"] = "Link encurtado com sucesso!";
+                    return RedirectToAction("Index");
+                }
+
+                return View(link);
+            }
+            catch (Exception e)
+            {
+                TempData["MensagemErro"] = $"Ops, não conseguimos encurtar o link. Tente novamente. Detalhe do erro: {e.Message}";
+                return RedirectToAction("Index");
+            }
         }
 
         public IActionResult Alterar(LinkModel link)
         {
-            _linkRepositorio.Atualizar(link);
-            return RedirectToAction("Index");
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _linkRepositorio.Atualizar(link);
+                    TempData["MensagemSucesso"] = "Link alterado com sucesso!";
+                    return RedirectToAction("Index");
+                }
+
+                return View("Editar", link);
+            }
+            catch (Exception e)
+            {
+                TempData["MensagemErro"] = $"Ops, não conseguimos alterar o link. Tente novamente. Detalhe do erro: {e.Message}";
+                return RedirectToAction("Index");
+            }
         }
 
         public IActionResult Apagar(int id)
         {
-            _linkRepositorio.Apagar(id);
-            return RedirectToAction("Index");
+            try
+            {
+                bool apagado = _linkRepositorio.Apagar(id);
+
+                if (apagado)
+                {
+                    TempData["MensagemSucesso"] = "Link apagado com sucesso!";
+                }
+                else
+                {
+                    TempData["MensagemErro"] = "Ops, não conseguimos apagar seu link";
+                }
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                TempData["MensagemErro"] = $"Ops, não conseguimos apagar o link. Tente novamente. Detalhe do erro: {e.Message}";
+                return RedirectToAction("Index");
+            }
         }
     }
 }
