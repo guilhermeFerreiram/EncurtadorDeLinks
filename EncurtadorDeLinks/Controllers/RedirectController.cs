@@ -19,6 +19,8 @@ namespace EncurtadorDeLinks.Controllers
         public IActionResult Index(string shortCode)
         {
             LinkModel link = _linkRepositorio.BuscarLinkPorShortCode(shortCode);
+            link.IncrementarCliques();
+            _linkRepositorio.Atualizar(link);
 
             if (link == null) return NotFound("URL não encontrada.");
 

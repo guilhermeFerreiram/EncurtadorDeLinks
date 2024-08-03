@@ -11,8 +11,9 @@ namespace EncurtadorDeLinks.Models
         public string Nome { get; set; }
         [Required(ErrorMessage = "Cole o link original...")]
         public string LinkOriginal { get; set; }
-        public string? LinkEncurtado { get; set; } // LinkEncurtado deve ser anulável para ModelState retornar true no Controller Link Action Criar [post]
+        public string? LinkEncurtado { get; set; } // Algumas propriedades devem ser anulável para ModelState retornar true no Controller Link Action Criar [post]
         public string? ShortCode { get; set; }
+        public int Cliques { get; set; }
 
         public void Encurtar() // Precisa conferir se shortCode já existe no banco de dados
         {
@@ -24,6 +25,11 @@ namespace EncurtadorDeLinks.Models
         public string GerarShortCode()
         {
             return Guid.NewGuid().ToString("N").Substring(0, 6);
+        }
+
+        public void IncrementarCliques()
+        {
+            Cliques++;
         }
     }
 }
