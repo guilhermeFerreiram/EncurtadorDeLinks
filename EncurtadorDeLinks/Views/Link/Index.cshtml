@@ -44,19 +44,19 @@
 
             @if (Model != null && Model.Any())
             {
-                foreach (var link in Model)
+                for (int i = 0; i < Model.Count; i++)
                 {
                     <tr>
-                        <td scope="row">@link.Id</td>
-                        <td>@link.Nome</td>
-                        <td>@link.LinkOriginal</td>
-                        <td>@link.LinkEncurtado</td>
-                        <td>@link.Cliques</td>
-                        <td>@link.ShortCode</td>
+                        <td scope="row">@Model[i].Id</td>
+                        <td>@Model[i].Nome</td>
+                        <td>@Model[i].LinkOriginal</td>
+                        <td><span id="span-@i">@Model[i].LinkEncurtado</span><button class="btn btn-dark btn-sm spaced-left" onclick="copyToClipboard('span-@i')">Copiar</button></td>
+                        <td>@Model[i].Cliques</td>
+                        <td>@Model[i].ShortCode</td>
                         <td>
                             <div class="btn-group" role="group">
-                                <a role="button" class="btn btn-primary" asp-route-id="@link.Id" asp-controller="Link" asp-action="Editar">Editar</a>
-                                <a role="button" class="btn btn-danger" asp-route-id="@link.Id" asp-controller="Link" asp-action="ApagarConfirmacao">Apagar</a>
+                                <a role="button" class="btn btn-primary" asp-route-id="@Model[i].Id" asp-controller="Link" asp-action="Editar">Editar</a>
+                                <a role="button" class="btn btn-danger" asp-route-id="@Model[i].Id" asp-controller="Link" asp-action="ApagarConfirmacao">Apagar</a>
                             </div>
                         </td>
                     </tr>

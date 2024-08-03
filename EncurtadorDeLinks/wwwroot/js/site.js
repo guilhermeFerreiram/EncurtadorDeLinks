@@ -30,3 +30,22 @@
 $('.close-alert').click(function () {
     $('.alert').hide('hide');
 });
+
+function copyToClipboard(spanId) {
+    
+    var span = document.getElementById(spanId);
+
+    var tempInput = document.createElement("input");
+    tempInput.value = span.textContent;
+
+    document.body.appendChild(tempInput);
+
+    tempInput.select();
+    tempInput.setSelectionRange(0, 99999); // Para dispositivos móveis
+
+    document.execCommand("copy");
+
+    document.body.removeChild(tempInput);
+
+    alert("Copied: " + tempInput.value);
+}
