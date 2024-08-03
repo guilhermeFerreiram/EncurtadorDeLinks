@@ -12,11 +12,13 @@ namespace EncurtadorDeLinks.Models
         [Required(ErrorMessage = "Cole o link original...")]
         public string LinkOriginal { get; set; }
         public string? LinkEncurtado { get; set; } // LinkEncurtado deve ser anulável para ModelState retornar true no Controller Link Action Criar [post]
+        public string? ShortCode { get; set; }
 
         public void Encurtar() // Precisa conferir se shortCode já existe no banco de dados
         {
             string shortCode = GerarShortCode();
-            LinkEncurtado = shortCode;
+            ShortCode = shortCode;
+            LinkEncurtado = "https://localhost:7084/u/" + shortCode;
         }
 
         public string GerarShortCode()

@@ -9,5 +9,6 @@ namespace EncurtadorDeLinks.Repositorio
         LinkModel ListarPorId(int id);
         LinkModel Atualizar(LinkModel link);
         bool Apagar(int id);
+        LinkModel BuscarLinkPorShortCode(string shortCode);
     }
 }

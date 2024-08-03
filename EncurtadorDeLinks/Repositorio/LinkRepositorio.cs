@@ -43,6 +43,11 @@ namespace EncurtadorDeLinks.Repositorio
             return linkDb;
         }
 
+        public LinkModel BuscarLinkPorShortCode(string shortCode)
+        {
+            return _bancoContext.Links.FirstOrDefault(x => x.ShortCode == shortCode);
+        }
+
         public List<LinkModel> BuscarTodos()
         {
             return _bancoContext.Links.ToList();

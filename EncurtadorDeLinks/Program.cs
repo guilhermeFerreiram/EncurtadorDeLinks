@@ -32,4 +32,9 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+app.MapControllerRoute(
+            name: "shortCode",
+            pattern: "u/{shortCode}",
+            defaults: new { controller = "Redirect", action = "Index" });
+
 app.Run();
